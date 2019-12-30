@@ -30,6 +30,7 @@ var manifestCmd = &cobra.Command{
 		if err != nil {
 			log.Fatalf("parsing reference %q: %v", image, err)
 		}
+		log.Printf("ref %#v\n", ref)
 
 		simple, msg, options := apiOptions()
 
