@@ -108,7 +108,7 @@ var pullCmd = &cobra.Command{
 		// This is where it uses the manifest to save the layers
 		start = time.Now()
 		if simple {
-			err = crane.Save(img, "somefile", savePath)
+			err = crane.Save(img, image, savePath)
 		} else {
 			// taken straight from pkg/crane.Save, but they don't have the options there
 			tag, ok := ref.(name.Tag)
