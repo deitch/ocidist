@@ -18,7 +18,7 @@ func apiOptions() (bool, string, []remote.Option) {
 		msg     []string
 	)
 
-	if password == "" && username == "" && proxyUrl == "" && !httpClient && !anonymous {
+	if password == "" && username == "" && proxyUrl == "" && !httpClient && !anonymous && writeFormat == FORMATV1 {
 		return true, "simple API", nil
 	}
 

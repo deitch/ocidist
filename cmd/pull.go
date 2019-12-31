@@ -6,21 +6,29 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"github.com/google/go-containerregistry/pkg/crane"
+	legacytarball "github.com/google/go-containerregistry/pkg/legacy/tarball"
 	"github.com/google/go-containerregistry/pkg/name"
 	v1 "github.com/google/go-containerregistry/pkg/v1"
+	"github.com/google/go-containerregistry/pkg/v1/layout"
 	"github.com/google/go-containerregistry/pkg/v1/remote"
-	"github.com/google/go-containerregistry/pkg/v1/tarball"
+	v1tarball "github.com/google/go-containerregistry/pkg/v1/tarball"
 	"github.com/spf13/cobra"
 )
 
 const (
-	digestTag = "digest-without-tag"
+	digestTag    = "digest-without-tag"
+	FORMATV1     = "v1"
+	FORMATLEGACY = "legacy"
+	FORMATLAYOUT = "layout"
 )
 
-var savePath string
+var (
+	savePath, writeFormat string
+)
 
 var pullCmd = &cobra.Command{
 	Use:   "pull",
@@ -112,7 +120,25 @@ var pullCmd = &cobra.Command{
 				tag = d.Repository.Tag(digestTag)
 			}
 
-			err = tarball.WriteToFile(savePath, tag, img)
+			switch writeFormat {
+			case FORMATV1:
+				err = v1tarball.WriteToFile(savePath, tag, img)
+			case FORMATLEGACY:
+				w, err := os.Create(savePath)
+				if err != nil {
+					log.Fatalf("unable to open %s to write legacy tar file: %v", savePath, err)
+				}
+				defer w.Close()
+				err = legacytarball.Write(tag, img, w)
+			case FORMATLAYOUT:
+				ii, err := desc.ImageIndex()
+				if err != nil {
+					log.Fatalf("provided image is not an index: %s", image)
+				}
+				_, err = layout.Write(savePath, ii)
+			default:
+				err = fmt.Errorf("unknown format: %s", writeFormat)
+			}
 		}
 		if err != nil {
 			log.Fatalf("error saving: %v", err)
@@ -124,7 +150,8 @@ var pullCmd = &cobra.Command{
 }
 
 func pullInit() {
-	pullCmd.Flags().StringVar(&savePath, "path", "", "path to save the image as a tar file")
+	pullCmd.Flags().StringVar(&savePath, "path", "", "path to save the image as a tar file, or directory for layout")
 	pullCmd.MarkFlagRequired("path")
 	pullCmd.Flags().BoolVar(&showHash, "hash", false, "show hashes for manifests and indexes")
+	pullCmd.Flags().StringVar(&writeFormat, "format", "v1", "format to save the image, can be one of 'v1', 'layout', 'legacy'")
 }
