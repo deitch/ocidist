@@ -10,6 +10,13 @@ import (
 	"github.com/google/go-containerregistry/pkg/v1/remote"
 )
 
+const (
+	digestTag    = "digest-without-tag"
+	FORMATV1     = "v1"
+	FORMATLEGACY = "legacy"
+	FORMATLAYOUT = "layout"
+)
+
 var showHash bool
 
 func apiOptions() (bool, string, []remote.Option) {
@@ -18,7 +25,7 @@ func apiOptions() (bool, string, []remote.Option) {
 		msg     []string
 	)
 
-	if password == "" && username == "" && proxyUrl == "" && !httpClient && !anonymous && writeFormat == FORMATV1 {
+	if password == "" && username == "" && proxyUrl == "" && !httpClient && !anonymous && pullWriteFormat == FORMATV1 {
 		return true, "simple API", nil
 	}
 

@@ -17,6 +17,8 @@ func init() {
 	tagsInit()
 	rootCmd.AddCommand(manifestCmd)
 	manifestInit()
+	rootCmd.AddCommand(convertCmd)
+	convertInit()
 	rootCmd.PersistentFlags().StringVar(&image, "image", "", "full image URL")
 	rootCmd.MarkFlagRequired("image")
 	rootCmd.PersistentFlags().StringVar(&username, "username", "", "username to authenticate against registry")

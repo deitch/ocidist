@@ -19,21 +19,14 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const (
-	digestTag    = "digest-without-tag"
-	FORMATV1     = "v1"
-	FORMATLEGACY = "legacy"
-	FORMATLAYOUT = "layout"
-)
-
 var (
-	savePath, writeFormat string
+	pullSavePath, pullWriteFormat string
 )
 
 var pullCmd = &cobra.Command{
 	Use:   "pull",
-	Short: "Pull the image for a given repository and save it as a tar file",
-	Long:  `For a given complete image URL, pull it and save it to a local tar file`,
+	Short: "Pull the image for a given repository and save it locally in the target format",
+	Long:  `For a given complete image URL, pull it and save it locally in the target format`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// this is the manifest referenced by the image. If it is an index, it returns the index.
 		var (
@@ -108,7 +101,7 @@ var pullCmd = &cobra.Command{
 		// This is where it uses the manifest to save the layers
 		start = time.Now()
 		if simple {
-			err = crane.Save(img, image, savePath)
+			err = crane.Save(img, image, pullSavePath)
 		} else {
 			// taken straight from pkg/crane.Save, but they don't have the options there
 			tag, ok := ref.(name.Tag)
@@ -120,13 +113,13 @@ var pullCmd = &cobra.Command{
 				tag = d.Repository.Tag(digestTag)
 			}
 
-			switch writeFormat {
+			switch pullWriteFormat {
 			case FORMATV1:
-				err = v1tarball.WriteToFile(savePath, tag, img)
+				err = v1tarball.WriteToFile(pullSavePath, tag, img)
 			case FORMATLEGACY:
-				w, err := os.Create(savePath)
+				w, err := os.Create(pullSavePath)
 				if err != nil {
-					log.Fatalf("unable to open %s to write legacy tar file: %v", savePath, err)
+					log.Fatalf("unable to open %s to write legacy tar file: %v", pullSavePath, err)
 				}
 				defer w.Close()
 				err = legacytarball.Write(tag, img, w)
@@ -135,23 +128,23 @@ var pullCmd = &cobra.Command{
 				if err != nil {
 					log.Fatalf("provided image is not an index: %s", image)
 				}
-				_, err = layout.Write(savePath, ii)
+				_, err = layout.Write(pullSavePath, ii)
 			default:
-				err = fmt.Errorf("unknown format: %s", writeFormat)
+				err = fmt.Errorf("unknown format: %s", pullWriteFormat)
 			}
 		}
 		if err != nil {
 			log.Fatalf("error saving: %v", err)
 		}
 		log.Printf("ended save, duration %d milliseconds", time.Since(start).Milliseconds())
-		log.Printf("saved in tar format to %s", savePath)
+		log.Printf("saved in tar format to %s", pullSavePath)
 
 	},
 }
 
 func pullInit() {
-	pullCmd.Flags().StringVar(&savePath, "path", "", "path to save the image as a tar file, or directory for layout")
+	pullCmd.Flags().StringVar(&pullSavePath, "path", "", "path to save the image as a tar file, or directory for layout")
 	pullCmd.MarkFlagRequired("path")
 	pullCmd.Flags().BoolVar(&showHash, "hash", false, "show hashes for manifests and indexes")
-	pullCmd.Flags().StringVar(&writeFormat, "format", "v1", "format to save the image, can be one of 'v1', 'layout', 'legacy'")
+	pullCmd.Flags().StringVar(&pullWriteFormat, "format", "v1", "format to save the image, can be one of 'v1', 'layout', 'legacy'")
 }

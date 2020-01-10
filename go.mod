@@ -10,6 +10,7 @@ require (
 	github.com/mdempsky/maligned v0.0.0-20180708014732-6e39bd26a8c8 // indirect
 	github.com/mdempsky/unconvert v0.0.0-20190921185256-3ecd357795af // indirect
 	github.com/mibk/dupl v1.0.0 // indirect
+	github.com/securego/gosec v0.0.0-20200106085552-9cb83e10afad // indirect
 	github.com/spf13/cobra v0.0.5
 	mvdan.cc/interfacer v0.0.0-20180901003855-c20040233aed // indirect
 	mvdan.cc/lint v0.0.0-20170908181259-adc824a0674b // indirect
