@@ -52,13 +52,18 @@ var manifestCmd = &cobra.Command{
 			log.Printf("referenced manifest hash sha256:%x\n", sha256.Sum256(manifest))
 		}
 		var out bytes.Buffer
-		if err = json.Indent(&out, manifest, "", "\t"); err != nil {
-			log.Fatalf("unable to indent json: %v", err)
+		if formatManifest {
+			if err = json.Indent(&out, manifest, "", "\t"); err != nil {
+				log.Fatalf("unable to indent json: %v", err)
+			}
+		} else {
+			out = *bytes.NewBuffer(manifest)
 		}
-		fmt.Printf("%s\n\n", out.String())
+		fmt.Printf("%s", out.String())
 	},
 }
 
 func manifestInit() {
 	manifestCmd.Flags().BoolVar(&showHash, "hash", false, "show hashes for manifests and indexes")
+	manifestCmd.Flags().BoolVar(&formatManifest, "format", false, "format manifest for readability")
 }

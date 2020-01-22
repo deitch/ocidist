@@ -194,7 +194,7 @@ tarloop:
 
 	tagList := make([]string, 0)
 	for reponame, v := range repos {
-		for repotag, _ := range v {
+		for repotag := range v {
 			tagList = append(tagList, fmt.Sprintf("%s:%s", reponame, repotag))
 		}
 	}

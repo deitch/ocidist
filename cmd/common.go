@@ -17,7 +17,7 @@ const (
 	FORMATLAYOUT = "layout"
 )
 
-var showHash bool
+var showHash, formatManifest bool
 
 func apiOptions() (bool, string, []remote.Option) {
 	var (
