@@ -6,9 +6,9 @@ It can exercise both the simple [go-containerregistry](https://github.com/google
 
 It supports the following commands:
 
-* `tags` - list the tags for an image, e.g. `ocidist tags --image docker.io/library/alpine`
-* `manifest` - get the manifest for an image reference, e.g. `ocidist manifest --image docker.io/library/alpine:3.10`
-* `pull` - pull an image based on its reference, e.g. `ocidist pull --image docker.io/library/alpine:3.10 --path /tmp/foo.tar `
+* `tags` - list the tags for an image, e.g. `ocidist tags docker.io/library/alpine`
+* `manifest` - get the manifest for an image reference, e.g. `ocidist manifest docker.io/library/alpine:3.10`
+* `pull` - pull an image based on its reference, e.g. `ocidist pull docker.io/library/alpine:3.10 --path /tmp/foo.tar `
 
 A pulled image will be saved in the standard tar file format used for `docker save` and `docker load`, as well as `docker2aci` for `rkt`.
 
@@ -21,7 +21,7 @@ When using the `manifest` command, you will get the referenced manifests. When u
 When using the `manifest` command, `ocidist` will provide you with the output manifest in a proper json-formatted string, along with the hash of the manifest. This is the manifest to which you referred directly (technically, an OCI descriptor). This, if you provided a reference to an actual image, e.g. `docker.io/library/alpine@sha256:e4355b66995c96b4b468159fc5c7e3540fcef961189ca13fee877798649f531a`, you will get the manifest for that image:
 
 ```sh
-$ ./dist/ocidist manifest --image docker.io/library/alpine@sha256:e4355b66995c96b4b468159fc5c7e3540fcef961189ca13fee877798649f531a
+$ ./dist/ocidist manifest docker.io/library/alpine@sha256:e4355b66995c96b4b468159fc5c7e3540fcef961189ca13fee877798649f531a
 simple API
 referenced manifest e4355b66995c96b4b468159fc5c7e3540fcef961189ca13fee877798649f531a
 {
@@ -45,7 +45,7 @@ referenced manifest e4355b66995c96b4b468159fc5c7e3540fcef961189ca13fee877798649f
 On the other hand, if you provide a reference to an index, e.g. `docker.io/library/alpine:3.10`, you will get the manifest for that index:
 
 ```sh
-$ ./dist/ocidist manifest --image docker.io/library/alpine:3.10
+$ ./dist/ocidist manifest docker.io/library/alpine:3.10
 simple API
 referenced manifest c19173c5ada610a5989151111163d28a67368362762534d8a8121ce95cf2bd5a
 {
@@ -135,7 +135,7 @@ When using the `pull` command, if the reference is to an image manifest, then it
 
 ### image
 
-You **must** set the name of the image with the option `--image`. This must be in the format:
+You **must** set the name of the image as the first argument. This must be in the format:
 
 ```
 <host>[:<port>]/path[:tag][@sha256:hash]

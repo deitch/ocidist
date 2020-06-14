@@ -11,15 +11,17 @@ import (
 )
 
 var tagsCmd = &cobra.Command{
-	Use:   "tags",
+	Use:   "tags <image>",
 	Short: "List tags for a repository",
 	Long:  `List all of the tags for a given repository in a given registry`,
+	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		var (
 			tags []string
 			err  error
 		)
 
+		image := args[0]
 		repo, err := name.NewRepository(image)
 		if err != nil {
 			log.Fatalf("parsing reference %q: %v", image, err)

@@ -24,9 +24,10 @@ var (
 )
 
 var pullCmd = &cobra.Command{
-	Use:   "pull",
+	Use:   "pull <image>",
 	Short: "Pull the image for a given repository and save it locally in the target format",
 	Long:  `For a given complete image URL, pull it and save it locally in the target format`,
+	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		// this is the manifest referenced by the image. If it is an index, it returns the index.
 		var (
@@ -37,7 +38,7 @@ var pullCmd = &cobra.Command{
 			err error
 			ref name.Reference
 		)
-
+		image := args[0]
 		ref, err = name.ParseReference(image)
 		if err != nil {
 			log.Fatalf("parsing reference %q: %v", image, err)

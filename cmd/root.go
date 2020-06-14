@@ -5,9 +5,9 @@ import (
 )
 
 var (
-	rootCmd                             = &cobra.Command{Use: "ocidist"}
-	image, username, password, proxyUrl string
-	anonymous, httpClient, verbose      bool
+	rootCmd                        = &cobra.Command{Use: "ocidist"}
+	username, password, proxyUrl   string
+	anonymous, httpClient, verbose bool
 )
 
 func init() {
@@ -19,8 +19,6 @@ func init() {
 	manifestInit()
 	rootCmd.AddCommand(convertCmd)
 	convertInit()
-	rootCmd.PersistentFlags().StringVar(&image, "image", "", "full image URL")
-	rootCmd.MarkFlagRequired("image")
 	rootCmd.PersistentFlags().StringVar(&username, "username", "", "username to authenticate against registry")
 	rootCmd.PersistentFlags().StringVar(&password, "password", "", "password to authenticate against registry")
 	rootCmd.PersistentFlags().BoolVar(&anonymous, "anonymous", false, "use anonymous auth, defaults to your local credentials")
