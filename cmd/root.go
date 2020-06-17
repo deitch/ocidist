@@ -19,6 +19,8 @@ func init() {
 	manifestInit()
 	rootCmd.AddCommand(convertCmd)
 	convertInit()
+	rootCmd.AddCommand(pullBlobCmd)
+	pullBlobInit()
 	rootCmd.PersistentFlags().StringVar(&username, "username", "", "username to authenticate against registry")
 	rootCmd.PersistentFlags().StringVar(&password, "password", "", "password to authenticate against registry")
 	rootCmd.PersistentFlags().BoolVar(&anonymous, "anonymous", false, "use anonymous auth, defaults to your local credentials")
