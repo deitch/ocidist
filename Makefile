@@ -13,3 +13,6 @@ $(BIN): $(DISTDIR)
 
 clean:
 	rm -rf $(BIN)
+
+install:
+	go install .
