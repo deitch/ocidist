@@ -9,6 +9,7 @@ It supports the following commands:
 * `tags` - list the tags for an image, e.g. `ocidist tags docker.io/library/alpine`
 * `manifest` - get the manifest for an image reference, e.g. `ocidist manifest docker.io/library/alpine:3.10`
 * `pull` - pull an image based on its reference, e.g. `ocidist pull docker.io/library/alpine:3.10 --path /tmp/foo.tar `
+* `blob` - get the content of a blob to stdout; messages will be to stderr, so you can just send it to a file if large, e.g. `ocidist blob docker.io/library/alpine@sha256:df20fa9351a15782c64e6dddb2d4a6f50bf6d3688060a34c4014b0d9a752eb4c > somefile.tgz`
 
 A pulled image will be saved in the standard tar file format used for `docker save` and `docker load`, as well as `docker2aci` for `rkt`.
 
