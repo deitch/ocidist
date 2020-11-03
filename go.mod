@@ -11,6 +11,7 @@ require (
 	github.com/mdempsky/maligned v0.0.0-20180708014732-6e39bd26a8c8 // indirect
 	github.com/mdempsky/unconvert v0.0.0-20190921185256-3ecd357795af // indirect
 	github.com/mibk/dupl v1.0.0 // indirect
+	github.com/opencontainers/image-spec v1.0.1
 	github.com/securego/gosec v0.0.0-20200106085552-9cb83e10afad // indirect
 	github.com/spf13/cobra v0.0.5
 	golang.org/x/tools v0.0.0-20200125223703-d33eef8e6825 // indirect
