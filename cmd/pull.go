@@ -13,9 +13,11 @@ import (
 	legacytarball "github.com/google/go-containerregistry/pkg/legacy/tarball"
 	"github.com/google/go-containerregistry/pkg/name"
 	v1 "github.com/google/go-containerregistry/pkg/v1"
+	"github.com/google/go-containerregistry/pkg/v1/empty"
 	"github.com/google/go-containerregistry/pkg/v1/layout"
 	"github.com/google/go-containerregistry/pkg/v1/remote"
 	v1tarball "github.com/google/go-containerregistry/pkg/v1/tarball"
+	ocispecv1 "github.com/opencontainers/image-spec/specs-go/v1"
 	"github.com/spf13/cobra"
 )
 
@@ -125,11 +127,31 @@ var pullCmd = &cobra.Command{
 				defer w.Close()
 				err = legacytarball.Write(tag, img, w)
 			case FORMATLAYOUT:
-				ii, err := desc.ImageIndex()
+				p, err := layout.FromPath(pullSavePath)
 				if err != nil {
-					log.Fatalf("provided image is not an index: %s", image)
+					p, err = layout.Write(pullSavePath, empty.Index)
+					if err != nil {
+						log.Fatalf("could not write to path %s: %v", pullSavePath, err)
+					}
 				}
-				_, err = layout.Write(pullSavePath, ii)
+				annotations := map[string]string{
+					ocispecv1.AnnotationRefName: image,
+				}
+
+				// first attempt as an index
+				ii, err := desc.ImageIndex()
+				if err == nil {
+					err = p.AppendIndex(ii, layout.WithAnnotations(annotations))
+				} else {
+					var im v1.Image
+					// try and image
+					im, err = desc.Image()
+					if err != nil {
+						log.Fatalf("provided image is neither an image nor an index: %s", image)
+					}
+					err = p.AppendImage(im, layout.WithAnnotations(annotations))
+				}
+
 			default:
 				err = fmt.Errorf("unknown format: %s", pullWriteFormat)
 			}
@@ -138,7 +160,7 @@ var pullCmd = &cobra.Command{
 			log.Fatalf("error saving: %v", err)
 		}
 		log.Printf("ended save, duration %d milliseconds", time.Since(start).Milliseconds())
-		log.Printf("saved in tar format to %s", pullSavePath)
+		log.Printf("saved in to %s", pullSavePath)
 
 	},
 }
