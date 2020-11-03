@@ -11,10 +11,10 @@ import (
 )
 
 const (
-	digestTag    = "digest-without-tag"
-	FORMATV1     = "v1"
-	FORMATLEGACY = "legacy"
-	FORMATLAYOUT = "layout"
+	digestTag           = "digest-without-tag"
+	FormatV1Tarball     = "v1-tarball"
+	FormatLegacyTarball = "legacy-tarball"
+	FormatV1Layout      = "v1-layout"
 )
 
 var showHash, formatManifest bool
@@ -25,7 +25,7 @@ func apiOptions() (bool, string, []remote.Option) {
 		msg     []string
 	)
 
-	if password == "" && username == "" && proxyUrl == "" && !httpClient && !anonymous && pullWriteFormat == FORMATV1 {
+	if password == "" && username == "" && proxyUrl == "" && !httpClient && !anonymous && pullWriteFormat == FormatV1Tarball {
 		return true, "simple API", nil
 	}
 

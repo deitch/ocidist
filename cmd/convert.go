@@ -35,7 +35,7 @@ var convertCmd = &cobra.Command{
 			log.Fatalf("unable to determine format of input file: %v", err)
 		}
 		switch inputFormat {
-		case FORMATLAYOUT:
+		case FormatV1Layout:
 			p, err := layout.FromPath(convertFromPath)
 			if err != nil {
 				log.Fatalf("unable to get image from OCI layout on disk input: %v", err)
@@ -51,7 +51,7 @@ var convertCmd = &cobra.Command{
 			if convertTag == "" {
 				log.Fatal("must provide a tag when converting from an OCI layout on disk")
 			}
-		case FORMATV1:
+		case FormatV1Tarball:
 			img, err = v1tarball.ImageFromPath(convertFromPath, nil)
 			if err != nil {
 				log.Fatalf("unable to get image from tarball input: %v", err)
@@ -85,9 +85,9 @@ var convertCmd = &cobra.Command{
 
 		// now write it to the output
 		switch convertToFormat {
-		case FORMATV1:
+		case FormatV1Tarball:
 			err = v1tarball.WriteToFile(convertToPath, tag, img)
-		case FORMATLEGACY:
+		case FormatLegacyTarball:
 			var w *os.File
 			w, err = os.Create(convertToPath)
 			if err != nil {
@@ -130,10 +130,10 @@ func guessFormat(p string) (string, error) {
 	}
 
 	if fi.IsDir() {
-		return FORMATLAYOUT, nil
+		return FormatV1Layout, nil
 	}
 
-	return FORMATV1, nil
+	return FormatV1Tarball, nil
 }
 
 func getTagsFromV1Tar(tarfile string) ([]string, error) {

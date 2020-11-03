@@ -117,16 +117,16 @@ var pullCmd = &cobra.Command{
 			}
 
 			switch pullWriteFormat {
-			case FORMATV1:
+			case FormatV1Tarball:
 				err = v1tarball.WriteToFile(pullSavePath, tag, img)
-			case FORMATLEGACY:
+			case FormatLegacyTarball:
 				w, err := os.Create(pullSavePath)
 				if err != nil {
 					log.Fatalf("unable to open %s to write legacy tar file: %v", pullSavePath, err)
 				}
 				defer w.Close()
 				err = legacytarball.Write(tag, img, w)
-			case FORMATLAYOUT:
+			case FormatV1Layout:
 				p, err := layout.FromPath(pullSavePath)
 				if err != nil {
 					p, err = layout.Write(pullSavePath, empty.Index)
@@ -169,5 +169,5 @@ func pullInit() {
 	pullCmd.Flags().StringVar(&pullSavePath, "path", "", "path to save the image as a tar file, or directory for layout")
 	pullCmd.MarkFlagRequired("path")
 	pullCmd.Flags().BoolVar(&showHash, "hash", false, "show hashes for manifests and indexes")
-	pullCmd.Flags().StringVar(&pullWriteFormat, "format", "v1", "format to save the image, can be one of 'v1', 'layout', 'legacy'")
+	pullCmd.Flags().StringVar(&pullWriteFormat, "format", FormatV1Layout, "format to save the image, can be one of 'v1-layout', 'v1-tarball', 'legacy-tarball'")
 }
