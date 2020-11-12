@@ -50,8 +50,8 @@ var manifestCmd = &cobra.Command{
 			manifest = desc.Manifest
 		}
 
-		if showHash || verbose {
-			log.Printf("referenced manifest hash sha256:%x\n", sha256.Sum256(manifest))
+		if showInfo || verbose {
+			log.Printf("referenced manifest hash sha256:%x size %d\n", sha256.Sum256(manifest), desc.Size)
 		}
 		var out bytes.Buffer
 		if formatManifest {
@@ -66,6 +66,6 @@ var manifestCmd = &cobra.Command{
 }
 
 func manifestInit() {
-	manifestCmd.Flags().BoolVar(&showHash, "hash", false, "show hashes for manifests and indexes")
+	manifestCmd.Flags().BoolVar(&showInfo, "detail", false, "show additional detail for manifests and indexes, such as hash and size")
 	manifestCmd.Flags().BoolVar(&formatManifest, "format", false, "format manifest for readability")
 }

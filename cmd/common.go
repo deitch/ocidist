@@ -17,7 +17,7 @@ const (
 	FormatV1Layout      = "v1-layout"
 )
 
-var showHash, formatManifest bool
+var showInfo, formatManifest bool
 
 func apiOptions() (bool, string, []remote.Option) {
 	var (

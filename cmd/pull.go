@@ -63,8 +63,8 @@ var pullCmd = &cobra.Command{
 			}
 			manifest = desc.Manifest
 		}
-		if showHash || verbose {
-			log.Printf("referenced manifest %x\n", sha256.Sum256(manifest))
+		if showInfo || verbose {
+			log.Printf("referenced manifest %x %d\n", sha256.Sum256(manifest), len(manifest))
 		}
 		var out bytes.Buffer
 		if err = json.Indent(&out, manifest, "", "\t"); err != nil {
@@ -96,8 +96,8 @@ var pullCmd = &cobra.Command{
 		if err != nil {
 			log.Fatalf("error getting digest: %v", err)
 		}
-		if showHash || verbose {
-			log.Printf("image manifest %s\n", digest.Hex)
+		if showInfo || verbose {
+			log.Printf("image manifest %s %d\n", digest.Hex, len(manifest))
 		}
 		fmt.Println(string(manifest))
 
@@ -168,6 +168,6 @@ var pullCmd = &cobra.Command{
 func pullInit() {
 	pullCmd.Flags().StringVar(&pullSavePath, "path", "", "path to save the image as a tar file, or directory for layout")
 	pullCmd.MarkFlagRequired("path")
-	pullCmd.Flags().BoolVar(&showHash, "hash", false, "show hashes for manifests and indexes")
+	pullCmd.Flags().BoolVar(&showInfo, "detail", false, "show additional detail for manifests and indexes, such as hash and size")
 	pullCmd.Flags().StringVar(&pullWriteFormat, "format", FormatV1Layout, "format to save the image, can be one of 'v1-layout', 'v1-tarball', 'legacy-tarball'")
 }
