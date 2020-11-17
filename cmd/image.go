@@ -1,5 +1,7 @@
 package cmd
 
+// silly comment
+
 import (
 	"io"
 	"log"
