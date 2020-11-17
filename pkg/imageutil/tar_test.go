@@ -20,19 +20,19 @@ func TestMergeLayers(t *testing.T) {
 		err error
 	}{
 		// basic mix single files
-		{[][]string{[]string{"/etc/foo"}, []string{"/a/b"}}, []string{"/a/b", "/etc/foo"}, nil},
+		{[][]string{{"/etc/foo"}, {"/a/b"}}, []string{"/a/b", "/etc/foo"}, nil},
 		// basic mix multiple files
-		{[][]string{[]string{"/etc/foo","/a/c"}, []string{"/a/b"}}, []string{"/a/b", "/etc/foo", "/a/c"}, nil},
+		{[][]string{{"/etc/foo", "/a/c"}, {"/a/b"}}, []string{"/a/b", "/etc/foo", "/a/c"}, nil},
 		// duplicates
-		{[][]string{[]string{"/etc/foo","/a/c", "/a/b", "/a/d"}, []string{"/a/b", "/a/.wh.c"}}, []string{"/a/b", "/a/b", "/a/d", "/etc/foo"}, nil},
+		{[][]string{{"/etc/foo", "/a/c", "/a/b", "/a/d"}, {"/a/b", "/a/.wh.c"}}, []string{"/a/b", "/a/b", "/a/d", "/etc/foo"}, nil},
 		// whiteout single file
-		{[][]string{[]string{"/etc/foo","/a/c"}, []string{"/a/b", "/a/.wh.c"}}, []string{"/a/b", "/etc/foo"}, nil},
+		{[][]string{{"/etc/foo", "/a/c"}, {"/a/b", "/a/.wh.c"}}, []string{"/a/b", "/etc/foo"}, nil},
 		// whiteout single file with peers and duplicates
-		{[][]string{[]string{"/etc/foo","/a/c", "/a/b", "/a/d"}, []string{"/a/b", "/a/.wh.c"}}, []string{"/a/b", "/a/b", "/a/d", "/etc/foo"}, nil},
+		{[][]string{{"/etc/foo", "/a/c", "/a/b", "/a/d"}, {"/a/b", "/a/.wh.c"}}, []string{"/a/b", "/a/b", "/a/d", "/etc/foo"}, nil},
 		// whiteout directory
-		{[][]string{[]string{"/etc/foo","/a/c", "/a/b", "/a/d"}, []string{"/.wh.a"}}, []string{"/etc/foo"}, nil},
+		{[][]string{{"/etc/foo", "/a/c", "/a/b", "/a/d"}, {"/.wh.a"}}, []string{"/etc/foo"}, nil},
 		// opaque directory
-		{[][]string{[]string{"/etc/foo","/a/c", "/a/b", "/a/d"}, []string{"/a/.wh..wh..opq"}}, []string{"/etc/foo"}, nil},
+		{[][]string{{"/etc/foo", "/a/c", "/a/b", "/a/d"}, {"/a/.wh..wh..opq"}}, []string{"/etc/foo"}, nil},
 	}
 
 	for i, tt := range tests {
