@@ -7,6 +7,7 @@ import (
 	"runtime"
 
 	"github.com/deitch/ocidist/pkg/imageutil"
+	"github.com/deitch/ocidist/pkg/layoututil"
 	"github.com/deitch/ocidist/pkg/util"
 
 	"github.com/spf13/cobra"
@@ -29,13 +30,13 @@ If the provided image is an index, will use the provided architecture, defaultin
 		imageName := args[0]
 
 		// get the cache
-		p, err := imageutil.GetCache(layoutPath)
+		p, err := layoututil.GetCache(layoutPath)
 		if err != nil {
 			log.Fatalf("unable to get v1 layout at %s: %v", layoutPath, err)
 		}
 
 		// get a reference to the image
-		image, err := imageutil.FindImageFromRoot(p, imageName, architecture)
+		image, err := layoututil.FindImageFromRoot(p, imageName, architecture)
 		if err != nil {
 			log.Fatalf("unable to get root image for %s at %s: %v", imageName, layoutPath, err)
 		}

@@ -1,4 +1,4 @@
-package imageutil
+package layoututil
 
 import (
 	"fmt"
