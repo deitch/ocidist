@@ -11,7 +11,9 @@ require (
 	github.com/coreos/go-etcd v2.0.0+incompatible // indirect
 	github.com/cpuguy83/go-md2man v1.0.10 // indirect
 	github.com/evanphx/json-patch v4.2.0+incompatible // indirect
-	github.com/google/go-containerregistry v0.1.5-0.20201116071159-70abb4c40905
+	github.com/go-logr/logr v0.3.0 // indirect
+	github.com/google/go-containerregistry v0.1.5-0.20201120214208-6df03039b8da
+	github.com/maxbrunsfeld/counterfeiter/v6 v6.3.0 // indirect
 	github.com/mdempsky/maligned v0.0.0-20180708014732-6e39bd26a8c8 // indirect
 	github.com/mdempsky/unconvert v0.0.0-20190921185256-3ecd357795af // indirect
 	github.com/mibk/dupl v1.0.0 // indirect
@@ -20,8 +22,10 @@ require (
 	github.com/securego/gosec v0.0.0-20200106085552-9cb83e10afad // indirect
 	github.com/spf13/cobra v1.0.0
 	github.com/ugorji/go/codec v0.0.0-20181204163529-d75b2dcb6bc8 // indirect
-	k8s.io/code-generator v0.17.2 // indirect
-	k8s.io/gengo v0.0.0-20200120114135-861776a73780 // indirect
+	golang.org/x/tools v0.0.0-20201121010211-780cb80bd7fb // indirect
+	k8s.io/code-generator v0.19.4 // indirect
+	k8s.io/gengo v0.0.0-20201113003025-83324d819ded // indirect
+	k8s.io/klog/v2 v2.4.0 // indirect
 	k8s.io/kubernetes v1.11.10 // indirect
 	mvdan.cc/interfacer v0.0.0-20180901003855-c20040233aed // indirect
 	mvdan.cc/lint v0.0.0-20170908181259-adc824a0674b // indirect
