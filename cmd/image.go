@@ -6,9 +6,9 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/deitch/ocidist/pkg/imageutil"
 	"github.com/deitch/ocidist/pkg/layoututil"
-	"github.com/deitch/ocidist/pkg/util"
+
+	"github.com/google/go-containerregistry/pkg/v1/mutate"
 
 	"github.com/spf13/cobra"
 )
@@ -41,27 +41,17 @@ If the provided image is an index, will use the provided architecture, defaultin
 			log.Fatalf("unable to get root image for %s at %s: %v", imageName, layoutPath, err)
 		}
 
-		// get the layers
-		layers, err := image.Layers()
-		if err != nil {
-			log.Fatalf("unable to get layers for %s at %s: %v", imageName, layoutPath, err)
-		}
-
-		layerReaders := []util.GetReadCloser{}
-		for _, layer := range layers {
-			layerReaders = append(layerReaders, func() (io.ReadCloser, error) {
-				return layer.Uncompressed()
-			})
-		}
 		outfile, err := os.Create(targetPath)
 		if err != nil {
 			log.Fatalf("unable to open target file %s: %v", targetPath, err)
 		}
 		defer outfile.Close()
-		if err := imageutil.ApplyLayers(outfile, layerReaders); err != nil {
+		rc := mutate.Extract(image)
+		n, err := io.Copy(outfile, rc)
+		if err != nil {
 			log.Fatalf("could not merge layers: %v", err)
 		}
-		log.Printf("Done! Image expanded at %s", targetPath)
+		log.Printf("Done! Image of size %d expanded at %s", n, targetPath)
 	},
 }
 
