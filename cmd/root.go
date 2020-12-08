@@ -17,6 +17,8 @@ func init() {
 	tagsInit()
 	rootCmd.AddCommand(manifestCmd)
 	manifestInit()
+	rootCmd.AddCommand(copyCmd)
+	copyInit()
 	rootCmd.AddCommand(convertCmd)
 	convertInit()
 	rootCmd.AddCommand(pullBlobCmd)
