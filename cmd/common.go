@@ -38,6 +38,9 @@ func apiOptions() (bool, string, []remote.Option) {
 	case username != "" || password != "":
 		msg = append(msg, "username password auth")
 		options = append(options, remote.WithAuth(authn.FromConfig(authn.AuthConfig{Username: username, Password: password})))
+	case !anonymous:
+		msg = append(msg, "default keychain auth")
+		options = append(options, remote.WithAuthFromKeychain(authn.DefaultKeychain))
 	case httpClient:
 		msg = append(msg, "custom http.Client")
 		tr := &http.Transport{}
