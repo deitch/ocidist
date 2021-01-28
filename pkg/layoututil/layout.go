@@ -45,7 +45,7 @@ func FindImageFromRoot(p layout.Path, imageName, architecture string) (v1.Image,
 		ii := indexes[0]
 		// we have the index, get the manifest that represents the manifest for the desired architecture
 		platform := v1.Platform{OS: "linux", Architecture: architecture}
-		images, err := partial.FindImages(ii, match.Platform(platform))
+		images, err := partial.FindImages(ii, match.Platforms(platform))
 		if err != nil || len(images) < 1 {
 			return nil, fmt.Errorf("error retrieving image %s for platform %v from cache: %v", imageName, platform, err)
 		}
