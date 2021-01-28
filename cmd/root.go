@@ -17,6 +17,8 @@ func init() {
 	tagsInit()
 	rootCmd.AddCommand(manifestCmd)
 	manifestInit()
+	rootCmd.AddCommand(configCmd)
+	configInit()
 	rootCmd.AddCommand(copyCmd)
 	copyInit()
 	rootCmd.AddCommand(convertCmd)
