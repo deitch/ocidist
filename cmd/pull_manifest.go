@@ -13,7 +13,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var manifestCmd = &cobra.Command{
+var pullManifestCmd = &cobra.Command{
 	Use:   "manifest <image>",
 	Short: "Get the manifest for a specific tag",
 	Long:  `Given a complete URL to an image, get the manifest and its sha256 hash.`,
@@ -65,7 +65,7 @@ var manifestCmd = &cobra.Command{
 	},
 }
 
-func manifestInit() {
-	manifestCmd.Flags().BoolVar(&showInfo, "detail", false, "show additional detail for manifests and indexes, such as hash and size")
-	manifestCmd.Flags().BoolVar(&formatManifest, "format", false, "format manifest for readability")
+func pullManifestInit() {
+	pullManifestCmd.Flags().BoolVar(&showInfo, "detail", false, "show additional detail for manifests and indexes, such as hash and size")
+	pullManifestCmd.Flags().BoolVar(&formatManifest, "format", false, "format manifest for readability")
 }

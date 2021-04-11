@@ -13,18 +13,10 @@ var (
 func init() {
 	rootCmd.AddCommand(pullCmd)
 	pullInit()
-	rootCmd.AddCommand(tagsCmd)
-	tagsInit()
-	rootCmd.AddCommand(manifestCmd)
-	manifestInit()
-	rootCmd.AddCommand(configCmd)
-	configInit()
 	rootCmd.AddCommand(copyCmd)
 	copyInit()
 	rootCmd.AddCommand(convertCmd)
 	convertInit()
-	rootCmd.AddCommand(pullBlobCmd)
-	pullBlobInit()
 	rootCmd.AddCommand(mergeImageCmd)
 	mergeImageInit()
 

@@ -10,7 +10,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var tagsCmd = &cobra.Command{
+var pullTagsCmd = &cobra.Command{
 	Use:   "tags <image>",
 	Short: "List tags for a repository",
 	Long:  `List all of the tags for a given repository in a given registry`,
@@ -42,5 +42,5 @@ var tagsCmd = &cobra.Command{
 	},
 }
 
-func tagsInit() {
+func pullTagsInit() {
 }

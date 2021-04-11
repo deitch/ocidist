@@ -20,7 +20,7 @@ var (
 	formatConfig bool
 	platform     string
 )
-var configCmd = &cobra.Command{
+var pullConfigCmd = &cobra.Command{
 	Use:   "config <image>",
 	Short: "Get the config for a specific tag",
 	Long: `Given a complete URL to an image, get the config for it. If the reference is an index, rather than a single manifest,
@@ -96,8 +96,8 @@ var configCmd = &cobra.Command{
 	},
 }
 
-func configInit() {
-	configCmd.Flags().BoolVar(&showInfo, "detail", false, "show additional detail for config, such as hash and size")
-	configCmd.Flags().BoolVar(&formatConfig, "format", false, "format config for readability")
-	configCmd.Flags().StringVar(&platform, "platform", "", "which platform to show, in case of a referenced index, in format 'os/arch', e.g. 'linux/amd64'")
+func pullConfigInit() {
+	pullConfigCmd.Flags().BoolVar(&showInfo, "detail", false, "show additional detail for config, such as hash and size")
+	pullConfigCmd.Flags().BoolVar(&formatConfig, "format", false, "format config for readability")
+	pullConfigCmd.Flags().StringVar(&platform, "platform", "", "which platform to show, in case of a referenced index, in format 'os/arch', e.g. 'linux/amd64'")
 }
