@@ -94,6 +94,8 @@ github.com/containerd/continuity v0.0.0-20200928162600-f2cc35102c2a h1:jEIoR0aA5
 github.com/containerd/continuity v0.0.0-20200928162600-f2cc35102c2a/go.mod h1:W0qIOTD7mp2He++YVq+kgfXezRYqzP1uDuMVH1bITDY=
 github.com/containerd/stargz-snapshotter/estargz v0.0.0-20201223015020-a9a0c2d64694 h1:OVQ4FVXeE6OjzuUifzER+7EulqTqw/94oKSqnooEowQ=
 github.com/containerd/stargz-snapshotter/estargz v0.0.0-20201223015020-a9a0c2d64694/go.mod h1:E9uVkkBKf0EaC39j2JVW9EzdNhYvpz6eQIjILHebruk=
+github.com/containerd/stargz-snapshotter/estargz v0.4.1 h1:5e7heayhB7CcgdTkqfZqrNaNv15gABwr3Q2jBTbLlt4=
+github.com/containerd/stargz-snapshotter/estargz v0.4.1/go.mod h1:x7Q9dg9QYb4+ELgxmo4gBUeJB0tl5dqH1Sdz0nJU1QM=
 github.com/coreos/bbolt v1.3.2/go.mod h1:iRUV2dpdMOn7Bo10OQBFzIJO9kkE559Wcmn+qkEiiKk=
 github.com/coreos/etcd v3.3.10+incompatible/go.mod h1:uF7uidLiAD3TWHmW31ZFd/JWoc32PjwdhPthX9715RE=
 github.com/coreos/go-etcd v2.0.0+incompatible/go.mod h1:Jez6KQU2B/sWsbdaef3ED8NzMklzPG4d5KIOhIy30Tk=
@@ -222,6 +224,8 @@ github.com/google/go-containerregistry v0.4.0 h1:45axtqLd66llqD8R9XgiCQ64foc7I2x
 github.com/google/go-containerregistry v0.4.0/go.mod h1:TX4KwzBRckt63iM22ZNHzUGqXMdLE1UFJuEQnC/14fE=
 github.com/google/go-containerregistry v0.4.1-0.20210121000801-859dff29bf30 h1:wfpR1m8syqM5T8PaDqspR7+shWMOMBX8MLKyna/721U=
 github.com/google/go-containerregistry v0.4.1-0.20210121000801-859dff29bf30/go.mod h1:TX4KwzBRckt63iM22ZNHzUGqXMdLE1UFJuEQnC/14fE=
+github.com/google/go-containerregistry v0.4.2-0.20210414195336-7e30746dde2f h1:iS9uGhkEb089fqybUYSM8ggVljFvxdIt88QnSfKU2+I=
+github.com/google/go-containerregistry v0.4.2-0.20210414195336-7e30746dde2f/go.mod h1:Ct15B4yir3PLOP5jsy0GNeYVaIZs/MK/Jz5any1wFW0=
 github.com/google/gofuzz v0.0.0-20161122191042-44d81051d367/go.mod h1:HP5RmnzzSNb993RKQDq4+1A4ia9nllfqcQFTQJedwGI=
 github.com/google/gofuzz v1.0.0/go.mod h1:dBl0BpW6vV/+mYPU4Po3pmUjxk6FQPldtuIdl/M65Eg=
 github.com/google/gofuzz v1.1.0/go.mod h1:dBl0BpW6vV/+mYPU4Po3pmUjxk6FQPldtuIdl/M65Eg=
@@ -774,6 +778,7 @@ k8s.io/code-generator v0.17.2 h1:pTwl3rLB1fUyxmvEzmVPMM0tBSdUehd7z+bDzpj4lPE=
 k8s.io/code-generator v0.17.2/go.mod h1:DVmfPQgxQENqDIzVR2ddLXMH34qeszkKSdH/N+s+38s=
 k8s.io/code-generator v0.19.4 h1:c8IL7RgTgJaYgr2bYMgjN0WikHnohbBhEgajfIkuP5I=
 k8s.io/code-generator v0.19.4/go.mod h1:moqLn7w0t9cMs4+5CQyxnfA/HV8MF6aAVENF+WZZhgk=
+k8s.io/code-generator v0.19.7/go.mod h1:lwEq3YnLYb/7uVXLorOJfxg+cUu2oihFhHZ0n9NIla0=
 k8s.io/code-generator v0.20.1 h1:kre3GNich5gbO3d1FyTT8fHI4ZJezZV217yFdWlQaRQ=
 k8s.io/code-generator v0.20.1/go.mod h1:UsqdF+VX4PU2g46NC2JRs4gc+IfrctnwHb76RNbWHJg=
 k8s.io/code-generator v0.20.2 h1:SQaysped4EtUDk3u1zphnUJiOAwFdhHx9xS3WKAE0x8=

@@ -6,7 +6,7 @@ import (
 
 var pullCmd = &cobra.Command{
 	Use:   "pull",
-	Short: "Pull parts of an image from a registry, saving to stadout or local files",
+	Short: "Pull parts of an image from a registry, saving to stdout or local files",
 	Long:  `Given a complete URL to an image, get various parts for it, including manifest, config, tags, etc.`,
 }
 

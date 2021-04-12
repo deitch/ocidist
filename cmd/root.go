@@ -13,6 +13,8 @@ var (
 func init() {
 	rootCmd.AddCommand(pullCmd)
 	pullInit()
+	rootCmd.AddCommand(pushCmd)
+	pushInit()
 	rootCmd.AddCommand(copyCmd)
 	copyInit()
 	rootCmd.AddCommand(convertCmd)

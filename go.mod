@@ -1,6 +1,6 @@
 module github.com/deitch/ocidist
 
-go 1.13
+go 1.15
 
 require (
 	4d63.com/gochecknoglobals v0.0.0-20190306162314-7c3491d2b6ec // indirect
@@ -16,7 +16,7 @@ require (
 	github.com/cpuguy83/go-md2man v1.0.10 // indirect
 	github.com/evanphx/json-patch v4.2.0+incompatible // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
-	github.com/google/go-containerregistry v0.4.1-0.20210121000801-859dff29bf30
+	github.com/google/go-containerregistry v0.4.2-0.20210414195336-7e30746dde2f
 	github.com/hashicorp/golang-lru v0.5.3 // indirect
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.3.0 // indirect
 	github.com/mdempsky/maligned v0.0.0-20180708014732-6e39bd26a8c8 // indirect
